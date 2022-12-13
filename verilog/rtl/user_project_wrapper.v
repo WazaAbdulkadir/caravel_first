@@ -72,7 +72,7 @@ module user_project_wrapper #(
     inout [`MPRJ_IO_PADS-10:0] analog_io,
 
     // Independent clock (on independent integer divider)
-    input   user_clock2,
+     input   user_clock2,
 
     // User maskable interrupt signals
     output [2:0] user_irq
@@ -82,40 +82,37 @@ module user_project_wrapper #(
 /* User project is instantiated  here   */
 /*--------------------------------------*/
 
-user_proj_example mprj (
+oto_pilot oto_pilot (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
 	.vssd1(vssd1),	// User area 1 digital ground
 `endif
 
-    .wb_clk_i(wb_clk_i),
-    .wb_rst_i(wb_rst_i),
-
-    // MGMT SoC Wishbone Slave
-
-    .wbs_cyc_i(wbs_cyc_i),
-    .wbs_stb_i(wbs_stb_i),
-    .wbs_we_i(wbs_we_i),
-    .wbs_sel_i(wbs_sel_i),
-    .wbs_adr_i(wbs_adr_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_ack_o(wbs_ack_o),
-    .wbs_dat_o(wbs_dat_o),
+    .clk(wb_clk_i),
+    .rst(wb_rst_i),
 
     // Logic Analyzer
 
-    .la_data_in(la_data_in),
-    .la_data_out(la_data_out),
-    .la_oenb (la_oenb),
+//    .la_data_in(la_data_in),
+//    .la_data_out(la_data_out),
+//    .la_oenb (la_oenb),
 
     // IO Pads
 
-    .io_in (io_in),
-    .io_out(io_out),
-    .io_oeb(io_oeb),
+    //.gnss_i (io_in[19:10]),
+    //.altimetre_i (io_in[29:20]),
+    //.hedef_yukseklik_i (io_in[36:30]),
+    //.yukseklik_bilgisi_i(io_in[37]),
+    //.motor_o(io_out[8]),
+    //.yesil_led_o(io_out[9]),
+    //.kirmizi_led_o(io_out[10]),
+    
+    .io_in(io_in[31:13]),
+    .io_out(io_out[10:8]),
+    .io_oeb(io_oeb[10:8])
 
     // IRQ
-    .irq(user_irq)
+  //  .irq(user_irq)
 );
 
 endmodule	// user_project_wrapper
