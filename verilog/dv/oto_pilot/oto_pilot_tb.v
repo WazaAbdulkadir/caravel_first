@@ -195,7 +195,7 @@ module oto_pilot_tb;
 	initial begin
 	    // Observe Output pins [2:0]
 		wait(mprj_io_0 == 3'b001);
-	 	//wait(mprj_io_0 == 3'b010);
+	 	wait(mprj_io_0 == 3'b010);
 		//wait(mprj_io_0 == 3'b100);
 		//wait(mprj_io_0 == 8'h04);
 		//wait(mprj_io_0 == 8'h05);
@@ -212,6 +212,7 @@ module oto_pilot_tb;
 		`else
 		    $display("Monitor: Test 1 Mega-Project IO (RTL) Passed");
 		`endif
+	#1000;	
 	    $finish;
 	end
 
@@ -221,17 +222,94 @@ module oto_pilot_tb;
 		#2000;
 		RSTB <= 1'b1;	    	// Release reset
 		#100;
+  
+                #300_000;
+                CSB = 1'b0;        
+	        #100;
+		 
+		hedef_yukseklik_i = 7;
+		#50;
+		hedef_yukseklik_i = 9;
+		#250;
+	
+	        RSTB <= 1'b0; 
+                #50;
+	        RSTB <= 1'b1;
+		#50; 
 
-	        hedef_yukseklik_i = 6'b101111;
 
-                gnss_i = 6'b001101;
-                altimetre_i= 6'b001100;
+                  
+		
+		 hedef_yukseklik_i = 6'b111111; //63m
 
-              yukseklik_bilgisi_i = 1'b1;
+	
+	       
+		
+                yukseklik_bilgisi_i = 1'b1;
+
+                #50;
 
 
-		#3_00_000;
-		CSB = 1'b0;		// CSB can be released
+		yukseklik_bilgisi_i = 1'b0;
+
+
+	        RSTB <= 1'b0;
+                #50;
+                RSTB <= 1'b1;
+                #50;
+	
+ 		yukseklik_bilgisi_i = 1'b1;
+
+
+                 hedef_yukseklik_i = 6'b101111; //47m  
+		 #25;
+
+		gnss_i = 4;
+		altimetre_i = 6;
+		#25;
+		gnss_i = 8;
+		altimetre_i = 16;
+		#25;
+		gnss_i = 20;
+		altimetre_i = 36;
+		#25;
+		gnss_i = 40;
+		altimetre_i = 46;
+		#25;
+		gnss_i = 36;
+		altimetre_i = 20;
+		#25;
+		gnss_i = 46;
+		altimetre_i = 52;
+		#25;
+		gnss_i = 56;
+		altimetre_i = 42;
+		#25;
+		gnss_i = 46;
+		altimetre_i = 60;
+		#25;
+		gnss_i = 36;
+		altimetre_i = 40;
+		#25;
+		gnss_i = 56;
+		altimetre_i = 60;
+		#25;
+		gnss_i = 46;
+		altimetre_i = 50;
+		#25;
+		gnss_i = 45;
+		altimetre_i = 45;
+		#50;												
+
+
+	        //#1000;
+		
+		//gnss_i = 6'b110000;
+                //altimetre_i= 6'b11001;
+
+
+	//	#300_000;
+	//	CSB = 1'b0;		// CSB can be released
 		 
 	    	//hedef_yukseklik_i = 6'b101111;
 

@@ -67,7 +67,7 @@ assign  yukseklik_bilgisi_i = io_in [18];
 reg hedef_yukseklik_hata;
 reg motor_ac;
 reg [5:0] sensor_fark;
-reg [5:0] sensor_ortalama;
+reg [7:0] sensor_ortalama;
 
 // registers
 reg [1:0] state;
@@ -79,7 +79,7 @@ reg motor;
 
 
 always @(*) begin
-    if (hedef_yukseklik_i < 10 || hedef_yukseklik_i > 100) begin
+    if (hedef_yukseklik_i < 10 || hedef_yukseklik_i > 55) begin
         hedef_yukseklik_hata = 1'b1;
     end
     else begin
@@ -151,7 +151,8 @@ always @(posedge clk) begin
             S_UCUS : begin
                 if (motor_ac == 1'b1) begin
                    motor        <= 1'b1; 
-                end
+                   yesil_led    <= 1'b0;
+	        end
                 else begin
                     motor       <= 1'b0;
                     yesil_led   <= 1'b1;
