@@ -88,8 +88,8 @@ oto_pilot oto_pilot (
 	.vssd1(vssd1),	// User area 1 digital ground
 `endif
 
-    .clk(wb_clk_i),
-    .rst(wb_rst_i),
+    .clock(wb_clk_i),
+    .reset(wb_rst_i),
 
     // Logic Analyzer
 

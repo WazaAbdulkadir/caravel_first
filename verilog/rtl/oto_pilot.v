@@ -27,8 +27,8 @@ module oto_pilot
 inout vssd1, 	
 inout vccd1,
 `endif
-input clk,
-input rst,
+input wire clock,
+input wire reset,
 
 //input [9:0] gnss_i,
 //input [9:0] altimetre_i,
@@ -112,8 +112,8 @@ always @(*) begin
 
 end
 
-always @(posedge clk) begin
-    if (rst == 1'b1) begin
+always @(posedge clock) begin
+    if (reset == 1'b1) begin
         state               <= S_YUKSEKLIK_BEKLE;
         hata_sayaci         <= 2'b00;
         atanan_yukseklik    <= 6'b000000;
